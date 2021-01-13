@@ -1,0 +1,17 @@
+{
+    "status": "0",
+    "msg": "",
+    "result": {
+        "count": 1,
+        "list": [
+            {
+                "_id": "58c284e6117a2e6599abef5f",
+                "productId": "201710005",
+                "productName": "小米笔记本",
+                "salePrice": 3549,
+                "productImage": "note.jpg",
+                "productUrl": ""
+            }
+        ]
+    }
+}
