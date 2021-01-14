@@ -1,0 +1,22 @@
+/* 全局样式表 */
+html,body,#app{
+    height: 100%;;
+    margin: 0;
+    padding: 0;
+}
+.el-step__title{
+    font-size: 13px;
+  }
+  .ql-editor{
+      min-height: 300px;
+  }
+  /* *{
+    cursor: url(https://images.cnblogs.com/cnblogs_com/jingjingjingjingjingjingrj/1701449/o_200415081944o_cursor.png),auto;
+
+} */
+
+
+
+
+
+
