@@ -11,11 +11,53 @@ export default new Router({
       name: 'home',
       component: Home
     },
-    // {
-    //   path: '/index',
-    //   name: 'index',
-    //   component:()=> import('@/views/index.vue'),
-    // },
-   
+    //登入
+    {
+      path: '/my',
+      name: 'my',
+      component:()=> import('@/views/my.vue'),
+    },
+    //登入后跳转
+    {
+      path: '/person',
+      name: 'person',
+      component:()=> import('@/views/person.vue'),
+    },
+    //注册
+    {
+      path: '/register',
+      name: 'register',
+      component:()=> import('@/views/register.vue'),
+    },
+    //设置
+    {
+      path: '/shezhi',
+      name: 'shezhi',
+      component:()=> import('@/views/shezhi.vue'),
+    },
+    //约课记录
+    {
+      path: '/ykjl',
+      name: 'ykjl',
+      component:()=> import('@/views/ykjl.vue'),
+    },
+    //我的收藏
+    {
+      path: '/wdsc',
+      name: 'wdsc',
+      component:()=> import('@/views/wdsc.vue'),
+    },
+    //个人
+    {
+      path: '/gr',
+      name: 'gr',
+      component:()=> import('@/views/gr.vue'),
+    },
+    //设置密码
+    {
+      path: '/szmm',
+      name: 'szmm',
+      component:()=> import('@/views/szmm.vue'),
+    },
   ]
 })
