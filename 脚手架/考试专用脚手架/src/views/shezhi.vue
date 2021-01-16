@@ -26,6 +26,7 @@
    methods: {
       tuic(){
         this.$router.push('/my')
+        window.sessionStorage.clear();
         this.$toast.success('退出成功');
       },
       fh(){

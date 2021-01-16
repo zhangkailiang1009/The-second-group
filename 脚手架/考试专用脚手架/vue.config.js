@@ -2,7 +2,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://ceshi5.dishait.cn/admin/', //你要跨域的网址  比如  'http://news.baidu.com',
+                target: 'http://120.53.31.103:84/api/app/', //你要跨域的网址  比如  'http://news.baidu.com',
                 // secure: true, // 如果是https接口，需要配置这个参数
                 changeOrigin: true, //这个参数是用来回避跨站问题的，配置完之后发请求时会自动修改http header里面的host，但是不会修改别的
                 pathRewrite: {

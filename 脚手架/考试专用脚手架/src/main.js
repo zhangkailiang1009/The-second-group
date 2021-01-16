@@ -16,6 +16,7 @@ import axios from '@/util/request.js'
 // axios.defaults.baseURL='https://www.liulongbin.top:8888/api/private/v1/'
 Vue.prototype.$http=axios;
 Vue.prototype.$axios=axios;
+
 // 配置echarts
 import echarts from 'echarts'
 

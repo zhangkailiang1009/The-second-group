@@ -3,10 +3,10 @@
     <div id="app">
       <div class="top">
         <router-link to="/info" tag="div" class="topa">
-          <img src="../assets/1.gif" alt="" />
+          <img :src= "data.avatar" alt="" />
           <div class="topb">
             <p style="font-size: 4.26667vw; margin-left: 10px">
-              178****3524
+              {{ data.nickname }}
             </p>
             <p class="p2"></p>
           </div>
@@ -64,11 +64,11 @@
             <p>我的订单</p>
           </div>
           <div class="item">
-            <van-icon name="fire"  size="25" />
+            <van-icon name="fire" size="25" />
             <p>会员订单</p>
           </div>
           <div class="item">
-            <van-icon name="coupon"  size="25" />
+            <van-icon name="coupon" size="25" />
             <p>约课订单</p>
           </div>
         </div>
@@ -141,12 +141,15 @@
 </template>
 
 <script>
+import { grzy } from "../util/http";
 export default {
   name: "",
   props: [],
   components: {},
   data() {
-    return {};
+    return {
+      data:{},
+    };
   },
   methods: {
     shezhi() {
@@ -155,15 +158,21 @@ export default {
     zkl_ykjl() {
       this.$router.push("/ykjl");
     },
-  add_wdsc(){
-    this.$router.push("/wdsc");
+    add_wdsc() {
+      this.$router.push("/wdsc");
+    },
+    gr() {
+      this.$router.push("/gr");
+    },
+    yj() {
+      this.$router.push("/liuyan");
+    },
   },
-  gr(){
-    this.$router.push("/gr");
-  },
-  yj(){
-    this.$router.push("/liuyan");
-  },
+  created() {
+    grzy().then((res) => {
+      console.log(res);
+      this.data = res;
+    });
   },
   mounted() {},
   watch: {},

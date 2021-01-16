@@ -1,79 +1,80 @@
 <template>
-  <div class="box">
-    <div class="img">
-      <img
-        src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019pILfAg7Avr1567732916.png"
-        alt
+  <div style="text-align: center">
+    <img
+      style="width: 80%; text-align: center; margin-top: 60px"
+      src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019pILfAg7Avr1567732916.png"
+      alt=""
+    />
+    <van-form @submit="onSubmit" style="margin-top: 40px">
+      <van-field
+        v-model="username"
+        placeholder="用户名"
       />
-    </div>
-    <!-- 登入 -->
-    <van-form style="width:80% margin:0 auto" @submit="onSubmit">
-      <van-field v-model="username" placeholder="请输入手机号" />
-      <van-field v-model="password" type="password" placeholder="请输入密码" />
-      <div class="zhaohui">
-        <span>找回密码</span>
-        <span @click="zkl_yzm">注册/验证码登录</span>
-      </div>
-      <div style="margin: 16px;">
-        <van-button round block type="info" class="btn" native-type="submit">登入</van-button>
+      <van-field
+        v-model="password"
+        type="password"
+        placeholder="密码"
+      />
+      <van-cell-group class="zhuce">
+        <p>找回密码</p>
+        <p @click="zhuce">注册/验证码登陆</p>
+      </van-cell-group>
+      <div style="margin: 16px">
+        <van-button round block type="primary" native-type="submit">
+          登陆
+        </van-button>
       </div>
     </van-form>
   </div>
 </template>
 
 <script>
+import { login } from "../util/http";
 export default {
   name: "",
-  props: [],
   components: {},
+  props: [],
   data() {
     return {
-      username: "", //用户名
-      password: "",//密码
+      username: "15810195203",
+      password: "6666666666",
     };
   },
+  computed: {},
+  watch: {},
+  created() {},
+  mounted() {},
   methods: {
-    zkl_yzm(){
+    onSubmit() {
+      let obj = {
+        mobile: this.username,
+        password: this.password,
+        type: 1,
+        client: 1,
+      };
+      login(obj).then((res) => {
+      console.log(res);
+        if (res) {
+          this.$toast.success("登陆成功");
+          window.sessionStorage.setItem("token",res.remember_token);
+          this.$router.push("/person");
+        }
+      });
+    },
+    zhuce() {
       this.$router.push("/register");
     },
-    onSubmit() {
-      this.$router.push("/person");
-    }
   },
-  mounted() {},
-  watch: {},
-  computed: {},
-  filters: {}
 };
 </script>
 
-<style lang="scss" scoped>
-.box {
-  width: 100%;
-  .img {
-    width: 100%;
-    text-align: center;
-    padding: 50px 7%;
-    box-sizing: border-box;
-    img {
-      width: 70%;
-    }
-  }
-}
-.zhaohui {
-  // text-align: center;
-  margin: 0 auto;
-  color: #cccccc;
-  font-size: 13px;
-  margin-top: 8px;
-  width: 100%;
-  span {
-    margin: 50px;
-  }
-}
-.btn {
-  background: orangered;
-  border: none;
-  margin-top: 50px;
+<style lang='scss' scoped>
+.zhuce {
+  box-sizing: border-box;
+  padding: 0px 20px;
+  font-size: 12px;
+  justify-content: space-between;
+  display: flex;
+  color: #969799;
 }
 </style>
