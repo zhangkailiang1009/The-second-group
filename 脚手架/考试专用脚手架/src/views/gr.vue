@@ -1,52 +1,52 @@
 <template>
   <div class="wrapper">
     <div class="title">
-      <span><van-icon class="addz" name="arrow-left" @click="fh" /></span>
+      <span><van-icon class="addz" name="arrow-left" @click="fh"/></span>
       个人信息
     </div>
     <div class="zong">
       <div class="a">
         <span>头像</span>
         <div class="aa">
-          <van-uploader  result-type="file">
-            <img width="37px" src="../assets/1.gif" alt="" />
+          <van-uploader :after-read="tx" result-type="file">
+            <img width="37px" :src="dalist.avatar" alt="" />
           </van-uploader>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
-      <div class="a">
+      <div class="a" @click="username">
         <span>昵称</span>
         <div class="aa">
-          <span>张凯亮</span>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span>{{ dalist.nickname }}</span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
       <div class="a">
         <span>手机号</span>
         <div class="aa">
-          <span>178****3524</span>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span>{{ obj.mobile }}</span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
       <div class="a">
         <span>性别</span>
         <div class="aa">
-          <span>男</span>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span>{{ obj.sex == 0 ? "男" : "女" }}</span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
       <div class="a">
         <span>出生日期</span>
         <div class="aa">
-          <span>1999-10-09</span>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span>{{ obj.birthday }}</span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
       <div class="a">
         <span>所在城市</span>
         <div class="aa">
-          <span>山西</span>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span>{{ obj.province_name }}</span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
         <span>年级</span>
         <div class="aa">
           <span>大学</span>
-          <span><van-icon name="arrow" class="addy" /></span>
+          <span><van-icon name="arrow" class="addy"/></span>
         </div>
       </div>
     </div>
@@ -71,24 +71,59 @@
 </template>
 
 <script>
+import { grzy, xgtx, xgxx } from "../util/http";
 export default {
   name: "",
   components: {},
   props: [],
   data() {
     return {
-
+      obj: [],
+      dalist: [],
     };
+  },
+  created() {
+    this.obj = JSON.parse(localStorage.getItem("data"));
+    grzy().then((res) => {
+      console.log(res);
+      this.dalist = res;
+      for(const i in this.dalist.attr){
+        console.log(this.dalist.attr[i].attr_value);
+      }
+    });
   },
   computed: {},
   watch: {},
-  created() {},
   mounted() {},
   methods: {
-      fh(){
-          this.$router.push('person');
-      }
-  }
+    fh() {
+      this.$router.push("person");
+    },
+    //换头像
+    tx(e) {
+      let content = e.file;
+      let data = new FormData();
+      data.append("file", content);
+      xgtx(data).then((res) => {
+        console.log(res);
+        this.$toast.success("修改成功");
+        xgxx({ avatar: res.path }).then((res) => {
+          console.log(res);
+        });
+        this.data.avatar = res.path;
+        localStorage.setItem("data", JSON.stringify(this.data));
+      });
+    },
+    //修改名称
+    username() {
+      this.$router.push({
+        name: "nickname",
+        params: {
+          nickname: this.dalist.nickname,
+        },
+      });
+    },
+  },
 };
 </script>
 

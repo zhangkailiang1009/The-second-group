@@ -8,11 +8,15 @@
     <van-form @submit="onSubmit" style="margin-top: 40px">
       <van-field
         v-model="username"
+        name="用户名"
+        label="用户名"
         placeholder="用户名"
       />
       <van-field
         v-model="password"
         type="password"
+        name="密码"
+        label="密码"
         placeholder="密码"
       />
       <van-cell-group class="zhuce">
@@ -29,14 +33,14 @@
 </template>
 
 <script>
-import { login } from "../util/http";
+import { loginpassword } from "../util/http";
 export default {
   name: "",
   components: {},
   props: [],
   data() {
     return {
-      username: "15810195203",
+      username: "13845683276",
       password: "6666666666",
     };
   },
@@ -45,18 +49,20 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    onSubmit() {
+    onSubmit(values) {
+      console.log("submit", values);
       let obj = {
-        mobile: this.username,
-        password: this.password,
+        mobile: values.用户名,
+        password: values.密码,
         type: 1,
         client: 1,
       };
-      login(obj).then((res) => {
-      console.log(res);
+      loginpassword(obj).then((res) => {
+        console.log(res);
         if (res) {
           this.$toast.success("登陆成功");
-          window.sessionStorage.setItem("token",res.remember_token);
+          localStorage.setItem("adminToken", res.remember_token);
+          localStorage.setItem("data", JSON.stringify(res));
           this.$router.push("/person");
         }
       });

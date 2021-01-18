@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 // 配置axios
 
 import axios from '@/util/request.js'
-// axios.defaults.baseURL='https://www.liulongbin.top:8888/api/private/v1/'
+// axios.defaults.baseURL='http://120.53.31.103:84/'
 Vue.prototype.$http=axios;
 Vue.prototype.$axios=axios;
 
@@ -49,26 +49,10 @@ import TreeTable from 'vue-table-with-tree-grid'
  import { Lazyload } from 'vant';
  
  Vue.use(Lazyload);
-router.beforeEach((to,from,next)=>{
-  // let zgj_admin=localStorage.getItem('zgj_admin')
-  // // console.log(zgj_admin)
-  // console.log(to)
-  // if(to.path=='/zgjadmin/login'){
-  //  if(zgj_admin!=null){
-  //    next('/zgjadmin/index')
-  //  }
-  // }else{
-  //   if(zgj_admin==null){
-  //     next('/zgjadmin/login')
-  //   }
-  // }
-  // // 面包屑
-  // if(to.hasOwnProperty('meta')){
-  //   store.commit('setbread',to.meta)
-  // }
-  // 面包屑
-  next()
-})
+// router.beforeEach((to,from,next)=>{
+  
+//   next()
+// })
 
 new Vue({
   router,

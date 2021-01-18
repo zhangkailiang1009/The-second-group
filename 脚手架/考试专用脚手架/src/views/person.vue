@@ -2,11 +2,11 @@
   <div class="wrapper">
     <div id="app">
       <div class="top">
-        <router-link to="/info" tag="div" class="topa">
-          <img :src= "data.avatar" alt="" />
+        <router-link to="/gr" tag="div" class="topa">
+          <img :src="obj.avatar" alt="" />
           <div class="topb">
             <p style="font-size: 4.26667vw; margin-left: 10px">
-              {{ data.nickname }}
+              {{ obj.nickname }}
             </p>
             <p class="p2"></p>
           </div>
@@ -141,14 +141,14 @@
 </template>
 
 <script>
-import { grzy } from "../util/http";
+import { grzy, wdsc } from "../util/http";
 export default {
   name: "",
   props: [],
   components: {},
   data() {
     return {
-      data:{},
+      obj: [],
     };
   },
   methods: {
@@ -169,12 +169,24 @@ export default {
     },
   },
   created() {
+    //获取个人信息接口
     grzy().then((res) => {
       console.log(res);
-      this.data = res;
+      this.obj = res;
+    });
+    //我的收藏
+    wdsc().then((res) => {
+      console.log(res);
     });
   },
-  mounted() {},
+  mounted() {
+    //token判断
+    if (localStorage.getItem("token")) {
+      this.$router.push("/person");
+    } else {
+      this.$router.push("/my");
+    }
+  },
   watch: {},
   computed: {},
   filters: {},

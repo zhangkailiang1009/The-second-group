@@ -2,7 +2,7 @@
   <div class="box">
     <!-- 头部 -->
     <div class="title">
-      <span class="lefta"><van-icon name="arrow-left" @click="fh" /></span>
+      <span class="lefta"><van-icon name="arrow-left" @click="fh"/></span>
       我的收藏
     </div>
 
@@ -34,9 +34,9 @@
 </template>
 
 <script>
+import { wdsc } from "../util/http";
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       page: 0,
@@ -44,15 +44,17 @@ export default {
       list: [],
     };
   },
-  created() {},
-  mounted() {
-
+  created() {
+    wdsc().then(res => {
+      console.log(res)
+    });
   },
+  mounted() {},
   methods: {
-      fh(){
-          this.$router.push('person');
-      }
-  }
+    fh() {
+      this.$router.push("person");
+    },
+  },
 };
 </script>
 

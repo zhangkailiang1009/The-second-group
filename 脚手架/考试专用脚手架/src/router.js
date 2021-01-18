@@ -56,6 +56,12 @@ export default new Router({
       name: 'ykjl',
       component:()=> import('@/views/ykjl.vue'),
     },
+    //修改名称
+    {
+      path: '/nickname',
+      name: 'nickname',
+      component:()=> import('@/views/nickname.vue'),
+    },
    
   ]
 })
